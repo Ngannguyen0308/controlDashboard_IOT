@@ -1,0 +1,146 @@
+/* Main container css */
+.maincontainer {
+  width: 100%;
+  height: calc(100% - 45px);
+  display: flex;
+}
+
+.maincontainer .left {
+  width: 100%;
+  margin: 20px;
+  overflow-y: scroll;
+  transition: all 0.3s cubic-bezier(0.175, 0.885, 0.32, 1.275);
+}
+
+.maincontainer .left::-webkit-scrollbar {
+  display: none;
+}
+
+.maincontainer .left .banner .ImgBanner img{
+  width: 100%;
+  height: 300px;
+  object-fit: cover;
+  border-radius: 20px;
+}
+.maincontainer .left .banner {
+  height: 300px;
+  border-radius: 20px;
+  box-shadow: rgba(252, 252, 252, 0.25) 0px 6px 12px -2px, rgba(227, 225, 225, 0.3) 0px 3px 7px -3px;  position: relative;
+}
+
+.maincontainer .left .banner .textContainer {
+  position: absolute;
+  bottom: 35px;
+  left: 20px;
+}
+
+.maincontainer .left .banner .textContainer h1 {
+  font-size: 3.5rem;
+  font-weight: 700;
+  color: #f1f1f1;
+  margin: 5px 0;
+}
+
+.maincontainer .left .banner .textContainer h2 {
+  font-size: 2.5rem;
+  color: #b1147d;
+  margin: 5px 0;
+}
+
+/* .maincontainer .left .banner .textContainer p {
+  color: #f1f1f1;
+  font-size: 18px;
+  margin: 5px 0;
+} */
+
+
+.maincontainer .left .cards {
+  background: #19162c;
+  padding: 10px;
+  box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
+  margin-top: 20px;
+  border-radius: 10px;
+}
+
+
+
+
+/* Box element css */
+.dashboard {
+    display: flex;
+    gap: 30px;
+    justify-content: center;
+    align-items: center;
+    /* margin: 20px; */
+    width: 100%;
+  }
+  
+  .box {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    border: 1px solid #ccc;
+    border-radius: 8px;
+    padding: 20px;
+    width: 270px;
+    /* max-width: 90%; */
+    height: 200px;
+    transition: background-color 0.3s;
+  }
+  
+  .dashboard .box .switchOn{
+    color: aliceblue;
+  }
+  .box div {
+    margin-top: 10px;
+    font-size: 18px;
+  }
+ 
+  .switch {
+    position: relative;
+    display: inline-block;
+    width: 40px;
+    height: 20px;
+    margin-top: 10px;
+  }
+  
+  .switch input {
+    opacity: 0;
+    width: 50px;
+    height: 0;
+    cursor: pointer;
+  }
+  
+  .slider {
+    position: absolute;
+    cursor: pointer;
+    top: 0;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    background-color: #ccc;
+    transition: 0.4s;
+    border-radius: 34px;
+  }
+  
+  .slider:before {
+    position: absolute;
+    content: "";
+    height: 14px;
+    width: 14px;
+    left: 3px;
+    bottom: 3px;
+    background-color: white;
+    transition: 0.4s;
+    border-radius: 50%;
+  }
+  
+  input:checked + .slider {
+    background-color: #2196F3;
+  }
+  
+  input:checked + .slider:before {
+    transform: translateX(20px);
+  }
+  
