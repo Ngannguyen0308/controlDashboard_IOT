@@ -6,7 +6,7 @@ import {
   faWind,
   faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
-import './BoxElement.css';
+import "./BoxElement.css";
 
 function BoxElement() {
   const [status, setStatus] = useState({
@@ -25,37 +25,65 @@ function BoxElement() {
 
   return (
     <div className="dashboard">
-      <div className="box" >
-        <FontAwesomeIcon icon={faTemperatureHigh} size="2x" color="white" />
+      <div className="box">
         <div className="switchOn">{status.temperature ? "ON" : "OFF"}</div>
         <label className="switch">
-          <input type="checkbox" checked={status.temperature} readOnly onClick={() => handleToggle("temperature")}/>
+          <input
+            type="checkbox"
+            checked={status.temperature}
+            readOnly
+            onClick={() => handleToggle("temperature")}
+          />
           <span className="slider"></span>
         </label>
+        <FontAwesomeIcon icon={faTemperatureHigh} size="2x" color="white" />
+        <div className="factor">Temperature</div>
       </div>
+
       <div className="box">
-        <FontAwesomeIcon icon={faTint} size="2x" color="white" />
         <div className="switchOn">{status.humidity ? "ON" : "OFF"}</div>
         <label className="switch">
-          <input type="checkbox" checked={status.humidity} readOnly onClick={() => handleToggle("humidity")} />
+          <input
+            type="checkbox"
+            checked={status.humidity}
+            readOnly
+            onClick={() => handleToggle("humidity")}
+          />
           <span className="slider"></span>
         </label>
+        <FontAwesomeIcon icon={faTint} size="2x" color="white" />
+        <div className="factor">Humidity</div>
       </div>
+
       <div className="box">
-        <FontAwesomeIcon icon={faWind} size="2x" color="white" />
         <div className="switchOn">{status.wind ? "ON" : "OFF"}</div>
         <label className="switch">
-          <input type="checkbox" checked={status.wind} readOnly onClick={() => handleToggle("wind")}/>
+          <input
+            type="checkbox"
+            checked={status.wind}
+            readOnly
+            onClick={() => handleToggle("wind")}
+          />
           <span className="slider"></span>
         </label>
+        <FontAwesomeIcon icon={faWind} size="2x" color="white" />
+        <div className="factor">Wind</div>
       </div>
+
       <div className="box">
-        <FontAwesomeIcon icon={faLightbulb} size="2x" color="white" />
         <div className="switchOn">{status.light ? "ON" : "OFF"}</div>
         <label className="switch">
-          <input type="checkbox" checked={status.light} readOnly onClick={() => handleToggle("light")}/>
+          <input
+            type="checkbox"
+            checked={status.light}
+            readOnly
+            onClick={() => handleToggle("light")}
+          />
           <span className="slider"></span>
         </label>
+        <FontAwesomeIcon icon={faLightbulb} size="2x" color="white" />
+        <div className="factor">Light</div>
+
       </div>
     </div>
   );
