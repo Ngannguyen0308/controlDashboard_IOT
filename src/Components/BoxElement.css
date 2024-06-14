@@ -108,7 +108,6 @@
 
 .switch {
   position: relative;
-  display: inline-block;
   width: 40px;
 }
 
@@ -144,7 +143,7 @@
 }
 
 input:checked + .slider {
-  background-color: #2196f3;
+  background-color: white;
 }
 
 input:checked + .slider:before {
