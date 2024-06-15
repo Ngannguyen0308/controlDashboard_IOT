@@ -2,7 +2,8 @@ import React, { useState, useEffect } from "react";
 import axios from "axios";
 import "./BoxElement.css";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { faDroplet, faPlus, faWind} from "@fortawesome/free-solid-svg-icons";
+import { faDroplet, faPlus, faWind } from "@fortawesome/free-solid-svg-icons";
+import { faSpinner } from "@fortawesome/free-solid-svg-icons";
 
 function GetWeather() {
   const [input, setInput] = useState("");
@@ -73,9 +74,7 @@ function GetWeather() {
     <div className="weather">
       {weather.loading && (
         <>
-          <br />
-          <br />
-          <i class="fas fa-spinner fa-spin" color="white"></i>
+          <FontAwesomeIcon icon={faSpinner} size="1x" color="white" />{" "}
         </>
       )}
 
