@@ -7,17 +7,21 @@ import {
   faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import "./BoxElement.css";
-import { Gauge, gaugeClasses } from "@mui/x-charts/Gauge";
+import GaugeTempt from "./GaugeTempt";
+import GaugeHum from "./GaugeHum";
+import GaugeLight from "./GaugeLight";
 
 function BoxValue() {
+  const valueLightLoss = 75;
+
   return (
     <div className="boxContainer">
       <div className="boxele">
         <div className="factor">Temperature</div>
         <FontAwesomeIcon icon={faTemperatureHigh} size="2x" color="white" />
         <div className="gaugeChart">
-          <Gauge
-            value={50}
+          {/* <Gauge
+            value={50} // change value here
             startAngle={-110}
             endAngle={110}
             sx={{
@@ -29,7 +33,8 @@ function BoxValue() {
                 fill: "#C75CB0",
               },
             }}
-          />
+          /> */}
+          <GaugeTempt />
         </div>
       </div>
 
@@ -37,41 +42,15 @@ function BoxValue() {
         <div className="factor">Humidity</div>
         <FontAwesomeIcon icon={faTint} size="2x" color="white" />
         <div className="gaugeChart">
-          <Gauge
-            value={50}
-            startAngle={-110}
-            endAngle={110}
-            sx={{
-              [`& .${gaugeClasses.valueText}`]: {
-                fontSize: 30,
-                transform: "translate(0px, 0px)",
-              },
-              [`& .${gaugeClasses.valueArc}`]: {
-                fill: "#C75CB0",
-              },
-            }}
-          />
+          <GaugeHum />
         </div>
       </div>
 
       <div className="boxele">
-        <div className="factor">Wind</div>
+        <div className="factor">Light loss</div>
         <FontAwesomeIcon icon={faWind} size="2x" color="white" />
         <div className="gaugeChart">
-          <Gauge
-            value={30}
-            startAngle={-110}
-            endAngle={110}
-            sx={(theme) => ({
-              [`& .${gaugeClasses.valueText}`]: {
-                fontSize: 30,
-                transform: "translate(0px, 0px)",
-              },
-              [`& .${gaugeClasses.valueArc}`]: {
-                fill: "#C75CB0",
-              },
-            })}
-          />
+          <GaugeLight />
         </div>
       </div>
     </div>
