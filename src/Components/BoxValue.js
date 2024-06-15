@@ -17,7 +17,7 @@ function BoxValue() {
         <FontAwesomeIcon icon={faTemperatureHigh} size="2x" color="white" />
         <div className="gaugeChart">
           <Gauge
-            value={75}
+            value={50}
             startAngle={-110}
             endAngle={110}
             sx={{
@@ -25,8 +25,10 @@ function BoxValue() {
                 fontSize: 30,
                 transform: "translate(0px, 0px)",
               },
+              [`& .${gaugeClasses.valueArc}`]: {
+                fill: "#C75CB0",
+              },
             }}
-            text={({ value, valueMax }) => `${value} / ${valueMax}`}
           />
         </div>
       </div>
@@ -44,8 +46,10 @@ function BoxValue() {
                 fontSize: 30,
                 transform: "translate(0px, 0px)",
               },
+              [`& .${gaugeClasses.valueArc}`]: {
+                fill: "#C75CB0",
+              },
             }}
-            text={({ value, valueMax }) => `${value} / ${valueMax}`}
           />
         </div>
       </div>
@@ -58,35 +62,15 @@ function BoxValue() {
             value={30}
             startAngle={-110}
             endAngle={110}
-            sx={{
-              [`& .${gaugeClasses.valueText}`]: {
-                fontSize: 30,
-                transform: "translate(0px, 0px)",
-              },
-            }}
-            text={({ value, valueMax }) => `${value} / ${valueMax}`}
-          />
-        </div>
-      </div>
-
-      <div className="boxele">
-        <div className="factor">Light</div>
-        <FontAwesomeIcon icon={faLightbulb} size="2x" color="white" />
-        <div className="gaugeChart">
-          <Gauge
-            value={80}
-            startAngle={-110}
-            endAngle={110}
-            sx={(theme)=> ({
+            sx={(theme) => ({
               [`& .${gaugeClasses.valueText}`]: {
                 fontSize: 30,
                 transform: "translate(0px, 0px)",
               },
               [`& .${gaugeClasses.valueArc}`]: {
-                fill: '#52b202',
+                fill: "#C75CB0",
               },
             })}
-            text={({ value, valueMax }) => `${value} / ${valueMax}`}
           />
         </div>
       </div>
