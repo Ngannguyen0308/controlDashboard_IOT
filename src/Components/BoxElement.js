@@ -23,7 +23,19 @@ function BoxElement() {
       ...prevStatus,
       [type]: newValue,
     }));
+
+    const url = newValue > 0 ? `http://172.16.4.101/LED=ON` : `http://172.16.4.101/LED=OFF`;
+    fetch(url)  
+      .then(response => {
+        if (!response.ok) {
+          throw new Error('Network response was not ok');
+        }
+      })
+      .catch(error => {
+        console.error('Error sending request:', error);
+      });
   };
+  
 
   return (
     <div className="dashboard">
