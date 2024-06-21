@@ -12,7 +12,7 @@ import GaugeHum from "./GaugeHum";
 import GaugeLight from "./GaugeLight";
 
 function BoxValue() {
-  const valueLightLoss = 75;
+  const valueLightLoss = 75; // change value here 
 
   return (
     <div className="boxContainer">

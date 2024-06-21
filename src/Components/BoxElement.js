@@ -5,10 +5,10 @@ import {
   faTemperatureHigh,
   faTint,
   faWind,
-  faLightbulb,
   faCloudRain,
 } from "@fortawesome/free-solid-svg-icons";
 import "./BoxElement.css";
+import MQTTComponent from "./Connection"; // Ensure the correct import path
 
 function BoxElement() {
   const [status, setStatus] = useState({
@@ -18,27 +18,32 @@ function BoxElement() {
     rain: 0,
   });
 
-  const handleSliderChange = (type, event, newValue) => {
-    setStatus((prevStatus) => ({
-      ...prevStatus,
-      [type]: newValue,
-    }));
+  const [publishMessage, setPublishMessage] = useState(null);
 
-    const url = newValue > 0 ? `http://172.16.4.101/LED=ON` : `http://172.16.4.101/LED=OFF`;
-    fetch(url)  
-      .then(response => {
-        if (!response.ok) {
-          throw new Error('Network response was not ok');
+  const handleSliderChange = (type, event, newValue) => {
+    setStatus((prevStatus) => {
+      const newStatus = { ...prevStatus, [type]: newValue };
+      const payloadMsg = {
+        type: type,
+        msg: newValue > 0 ? "ON" : "OFF",
+      }
+      console.log("CHECK HANDLE SLIDERCHANG", publishMessage, "_", setPublishMessage);
+      if (publishMessage) {
+        try {
+          publishMessage('emqx/esp8266/led', JSON.stringify(payloadMsg));
+        } catch (error) {
+          console.error('Error publishing message:', error);
         }
-      })
-      .catch(error => {
-        console.error('Error sending request:', error);
-      });
+      } else {
+        console.warn('publishMessage function is not yet available');
+      }
+      return newStatus;
+    });
   };
-  
 
   return (
     <div className="dashboard">
+      <MQTTComponent onPublish={setPublishMessage} />
       <div className="box">
         <div className="switchOn">{status.temperature > 0 ? "ON" : "OFF"}</div>
         <label className="switch">

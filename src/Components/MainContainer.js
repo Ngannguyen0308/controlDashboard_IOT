@@ -5,6 +5,8 @@ import BoxElement from "./BoxElement";
 import { ReactTyped } from "react-typed";
 import GetWeather from "./GetWeather";
 import BoxValue from "./BoxValue";
+import MQTTComponent from "./Connection";
+import handleMess from "./handleMessage";
 
 function MainContainer() {
   return (
@@ -32,6 +34,8 @@ function MainContainer() {
         <div className="cards">
           <BoxElement />
           <BoxValue/>
+          <MQTTComponent/>
+          {/* <handleMess/> */}
         </div>
       </div>
     </div>
