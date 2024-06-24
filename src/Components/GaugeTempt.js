@@ -1,7 +1,8 @@
 import React from "react";
 import GaugeComponent from "react-gauge-component";
 
-function GaugeTempt() {
+function GaugeTempt({value}) {
+  console.log("check TEMP", value);
   return (
     <div>
     <GaugeComponent
@@ -62,7 +63,7 @@ function GaugeTempt() {
         //   ],
         }
       }}
-      value={30} // change value here
+      value={value} // change value here
       minValue={10}
       maxValue={50}
     />

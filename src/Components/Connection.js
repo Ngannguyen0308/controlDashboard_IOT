@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import mqtt from 'mqtt';
 
-const MQTTComponent = ({ onMessage, onPublish }) => {
+const ConnectToBroker = ({ onMessage }) => {
   const mqttClientRef = useRef(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const MQTTComponent = ({ onMessage, onPublish }) => {
       reconnectPeriod: 1000,
       connectTimeout: 30 * 1000,
     };
-
+    console.log("CHECK TYPEOF", typeof(onMessage));
     const mqttClient = mqtt.connect(url, options);
     mqttClientRef.current = mqttClient;
 
@@ -31,7 +31,7 @@ const MQTTComponent = ({ onMessage, onPublish }) => {
     });
 
     mqttClient.on('reconnect', () => {
-      console.log('Reconnecting to MQTT broker');
+      console.log('Reconnecting...');
     });
 
     mqttClient.on('error', (err) => {
@@ -43,6 +43,7 @@ const MQTTComponent = ({ onMessage, onPublish }) => {
       const payload = { topic, message: message.toString() };
       console.log('Received message:', payload);
       if (typeof onMessage === 'function') {
+        console.log("CHECK RUN GET MESSAGES");
         onMessage(payload);
       }
     });
@@ -57,29 +58,7 @@ const MQTTComponent = ({ onMessage, onPublish }) => {
     };
   }, [onMessage]);
 
-  useEffect(() => {
-    console.log("RUN useEffect  ");
-    const publishMessage = (topic, payload) => {
-      const mqttClient = mqttClientRef.current;
-      if (mqttClient && mqttClient.connected) {
-        mqttClient.publish(topic, payload, { qos: 0 }, (error) => {
-          if (error) {
-            console.error('Publish error:', error);
-          }
-        });
-      } else {
-        console.warn('Cannot publish, MQTT client is disconnected');
-      }
-    };
-    console.log("RUN HERE 1");
-
-    if (typeof onPublish === 'function') {
-      console.log("RUN HERE 2");
-      onPublish(publishMessage);
-    }
-  }, [onPublish]);
-
-  return null;
+  return null; // 
 };
 
-export default MQTTComponent;
+export default ConnectToBroker;

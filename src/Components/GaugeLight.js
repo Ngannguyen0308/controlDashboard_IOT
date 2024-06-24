@@ -1,7 +1,7 @@
 import React from "react";
 import GaugeComponent from "react-gauge-component";
 
-function GaugeLight() {
+function GaugeLight({value}) {
   return (
     <div>
     <GaugeComponent
@@ -47,7 +47,7 @@ function GaugeLight() {
         // elastic: true,
       }}
       
-      value={30} // change value here
+      value={value} // change value here
       minValue={0}
       maxValue={50}
     />

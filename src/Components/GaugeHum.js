@@ -1,7 +1,7 @@
 import React from "react";
 import GaugeComponent from "react-gauge-component";
 
-function GaugeHum() {
+function GaugeHum({value}) {
   return (
     <GaugeComponent
       type="semicircle"
@@ -43,7 +43,7 @@ function GaugeHum() {
         length: 0.8,
         width: 15,
       }}
-      value={30} // change value here
+      value={value} // change value here
       minValue={0}
       maxValue={100}
     />
