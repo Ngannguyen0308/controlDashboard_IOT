@@ -1,7 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import mqtt from 'mqtt';
 
-const ConnectToBroker = ({ onMessage }) => {
+const ConnectToBroker = ({ onMessage, publishMessage}) => {
   const mqttClientRef = useRef(null);
 
   useEffect(() => {
@@ -17,7 +17,7 @@ const ConnectToBroker = ({ onMessage }) => {
       reconnectPeriod: 1000,
       connectTimeout: 30 * 1000,
     };
-    console.log("CHECK TYPEOF", typeof(onMessage));
+    console.log("CHECK TYPEOF", typeof(publishMessage));
     const mqttClient = mqtt.connect(url, options);
     mqttClientRef.current = mqttClient;
 
@@ -57,6 +57,22 @@ const ConnectToBroker = ({ onMessage }) => {
       mqttClientRef.current = null;
     };
   }, [onMessage]);
+
+  //Publish messages to mqtt
+  useEffect(()=>{
+    if(mqttClientRef.current && publishMessage){
+      console.log("CHECK DATA PUBLISH", publishMessage);
+      const messageString = JSON.stringify(publishMessage);
+      mqttClientRef.current.publish('emqx/esp8266/led', messageString, { qos: 0 }, (error) => {
+        if (error) {
+          console.log('Publish error:', error);
+        } else {
+          console.log(`Message published to topic: ${messageString}`);
+        }
+      });
+    }
+
+  }, [publishMessage]);
 
   return null; // 
 };
