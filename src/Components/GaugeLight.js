@@ -44,7 +44,6 @@ function GaugeLight({value}) {
         color: '#C75CB0',
         length: 0.80,
         width: 15,
-        // elastic: true,
       }}
       
       value={value} // change value here

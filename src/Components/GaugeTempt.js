@@ -2,7 +2,9 @@ import React from "react";
 import GaugeComponent from "react-gauge-component";
 
 function GaugeTempt({value}) {
-  console.log("check TEMP", value);
+  if(!value){
+    value = 10;
+  }
   return (
     <div>
     <GaugeComponent
@@ -15,7 +17,7 @@ function GaugeTempt({value}) {
         subArcs: [
           {
             limit: 17,
-            color: '#F5CD19',
+            color: '#c75cb0',
             showTick: true,
             tooltip: {
               text: 'Low temperature!'

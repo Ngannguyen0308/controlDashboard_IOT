@@ -1,5 +1,13 @@
-/* Main container css */
+/* CONTAINER.JS */
+.container {
+  width: calc(100% - 100px);
+  padding: 20px;
+  /* padding-top: 30px; */
+}
+
+/* MainContainer css */
 .maincontainer {
+  /* width: calc(100% - 15px); */
   width: 100%;
   height: calc(100% - 45px);
   display: flex;
@@ -43,42 +51,29 @@
   margin: 5px 0;
 }
 
-/* .maincontainer .left .banner .textContainer h2 {
-  font-size: 2.5rem;
-  color: #b1147d;
-  margin: 5px 0;
-} */
-
-/* .maincontainer .left .banner .textContainer p {
-  color: #f1f1f1;
-  font-size: 18px;
-  margin: 5px 0;
-} */
-
 .maincontainer .left .cards {
   background: #49316d8b;
   padding: 10px;
   box-shadow: 0px 0px 20px rgba(0, 0, 0, 0.4);
   margin-top: 20px;
   border-radius: 10px;
+  /* margin-right: 20px; */
 }
 
 /* Box element css */
 .dashboard {
   display: flex;
+  flex-wrap: wrap;
   gap: 30px;
   justify-content: center;
-  align-items: center;
   /* margin: 20px; */
   padding: 10px;
-  width: 100%;
+  /* width: 100%; */
 }
 
 .box {
-  /* display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center; */
+  flex: 1, 1, calc(25% - 40px);
+  min-width: 200px;
   border-radius: 8px;
   box-shadow: rgba(251, 251, 251, 0.503) 0px 3px 8px;
   padding: 20px;
@@ -148,6 +143,25 @@ input:checked + .slider {
 
 input:checked + .slider:before {
   transform: translateX(20px);
+}
+
+
+@media (max-width: 1200px) {
+  .box {
+    flex: 1 1 calc(33.33% - 40px); 
+  }
+}
+
+@media (max-width: 900px) {
+  .box {
+    flex: 1 1 calc(50% - 40px); 
+  }
+}
+
+@media (max-width: 600px) {
+  .box {
+    flex: 1 1 calc(100% - 40px); 
+  }
 }
 
 /* WEATHER CUSTOME */
