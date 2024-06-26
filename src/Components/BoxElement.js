@@ -38,7 +38,7 @@ function BoxElement() {
         msg: msg,
       };
       setPublishMsg(payloadMsg);
-      console.log("CHECK HANDLE SLIDERCHANG", newStatus);
+      // console.log("CHECK HANDLE SLIDERCHANG", newStatus);
 
       return newStatus;
     });

@@ -1,55 +1,58 @@
-import React, { useEffect, useRef } from 'react';
-import mqtt from 'mqtt';
+import React, { useEffect, useRef } from "react";
+import mqtt from "mqtt";
 
-const ConnectToBroker = ({ onMessage, publishMessage}) => {
+const ConnectToBroker = ({ onMessage, publishMessage }) => {
   const mqttClientRef = useRef(null);
 
   useEffect(() => {
     if (mqttClientRef.current) return;
 
-    const url = 'wss://broker.emqx.io:8084/mqtt';
+    const url = "wss://broker.emqx.io:8084/mqtt";
     const options = {
       keepalive: 60,
-      clientId: 'emqx_react_' + Math.random().toString(16).substring(2, 8),
-      protocolId: 'MQTT',
+      clientId: "emqx_react_" + Math.random().toString(16).substring(2, 8),
+      protocolId: "MQTT",
       protocolVersion: 4,
       clean: true,
       reconnectPeriod: 1000,
       connectTimeout: 30 * 1000,
     };
-    console.log("CHECK TYPEOF", typeof(publishMessage));
+    console.log("CHECK TYPEOF", typeof publishMessage);
     const mqttClient = mqtt.connect(url, options);
     mqttClientRef.current = mqttClient;
 
-    mqttClient.on('connect', () => {
-      console.log('Connected to MQTT broker');
-      mqttClient.subscribe('emqx/esp8266/led', { qos: 0 }, (error) => {
+    mqttClient.on("connect", () => {
+      console.log("Connected to MQTT broker");
+      mqttClient.publish("emqx/esp8266/led", "", { qos: 0, retain: true });
+      mqttClient.subscribe("emqx/esp8266/led", { qos: 0 }, (error) => {
         if (error) {
-          console.log('Subscribe error:', error);
+          console.log("Subscribe error:", error);
         }
       });
     });
 
-    mqttClient.on('reconnect', () => {
-      console.log('Reconnecting...');
+    mqttClient.on("reconnect", () => {
+      console.log("Reconnecting...");
     });
 
-    mqttClient.on('error', (err) => {
-      console.error('Connection error:', err);
+    mqttClient.on("error", (err) => {
+      console.error("Connection error:", err);
       mqttClient.end();
     });
 
-    mqttClient.on('message', (topic, message) => {
+    mqttClient.on("message", (topic, message) => {
       const payload = { topic, message: message.toString() };
-      console.log('Received message:', payload);
-      if (typeof onMessage === 'function') {
-        console.log("CHECK RUN GET MESSAGES");
+      // console.log("Received message:", payload);
+      if (typeof onMessage === "function") {
         onMessage(payload);
+      } else {
+        console.log("ERROR get messages");
       }
     });
+   
 
-    mqttClient.on('close', () => {
-      console.log('Disconnected from MQTT broker');
+    mqttClient.on("close", () => {
+      console.log("Disconnected from MQTT broker");
     });
 
     return () => {
@@ -59,22 +62,26 @@ const ConnectToBroker = ({ onMessage, publishMessage}) => {
   }, [onMessage]);
 
   //Publish messages to mqtt
-  useEffect(()=>{
-    if(mqttClientRef.current && publishMessage){
-      console.log("CHECK DATA PUBLISH", publishMessage);
+  useEffect(() => {
+    if (mqttClientRef.current && publishMessage) {
+      // console.log("CHECK DATA PUBLISH", publishMessage);
       const messageString = JSON.stringify(publishMessage);
-      mqttClientRef.current.publish('emqx/esp8266/led', messageString, { qos: 0 }, (error) => {
-        if (error) {
-          console.log('Publish error:', error);
-        } else {
-          console.log(`Message published to topic: ${messageString}`);
+      mqttClientRef.current.publish(
+        "emqx/esp8266/led",
+        messageString,
+        { qos: 0 },
+        (error) => {
+          if (error) {
+            console.log("Publish error:", error);
+          } else {
+            console.log(`Message published to topic: ${messageString}`);
+          }
         }
-      });
+      );
     }
-
   }, [publishMessage]);
 
-  return null; // 
+  return null; 
 };
 
 export default ConnectToBroker;

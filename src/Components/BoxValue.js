@@ -21,10 +21,9 @@ function BoxValue() {
     if (payload) {
       const messages = JSON.parse(payload.message);
       const { msg, type } = messages;
-      console.log("Extracted msg:", msg);
-      console.log("Extracted type:", type);
+      // console.log("Extracted messages:", messages);
+      // console.log("Extracted type & msg:", msg, type);
       // const value = parseFloat(msg);
-      // console.log('Parsed value:', value);
       if (!isNaN(msg)) {
         switch (type) {
           case 'temperature':
@@ -39,7 +38,11 @@ function BoxValue() {
           default:
             break;
         }
+      } else{
+        console.log('Invalid message:', msg);
       }
+    } else{
+      console.log("No payload");
     } 
   };
 
