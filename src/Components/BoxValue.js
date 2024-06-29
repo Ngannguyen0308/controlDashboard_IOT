@@ -18,12 +18,13 @@ function BoxValue() {
   const [light, setLight] = useState(0);
 
   const hanldeMessages = (payload) => {
-    if (payload) {
+    console.log("CHECK PAYLOAD DATA", payload);
+    if (payload && payload.message) {
+      // const messageString = payload.message.toString();
       try {
         const messages = JSON.parse(payload.message);
         const { msg, type } = messages;
         console.log("CHECK PAYLOAD BOXVALUE:", messages);
-
         if (!isNaN(msg)) {
           switch (type) {
             case "temperature":

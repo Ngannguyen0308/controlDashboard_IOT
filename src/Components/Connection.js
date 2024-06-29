@@ -20,7 +20,7 @@ const ConnectToBroker = ({ onMessage, publishMessage }) => {
     console.log("CHECK TYPEOF", typeof publishMessage);
     const mqttClient = mqtt.connect(url, options);
     mqttClientRef.current = mqttClient;
-    
+
     // Handle connection to broker
     mqttClient.on("connect", () => {
       console.log("Connected to MQTT broker");
@@ -31,22 +31,26 @@ const ConnectToBroker = ({ onMessage, publishMessage }) => {
         }
       });
     });
+
     // Handle reconnection attempts
     mqttClient.on("reconnect", () => {
       console.log("Reconnecting...");
     });
+
     // Handle connection errors
     mqttClient.on("error", (err) => {
       console.error("Connection error:", err);
       mqttClient.end();
     });
+
     // Handle incoming messages
     mqttClient.on("message", (topic, message) => {
       const payload = { topic, message: message.toString() };
+
       if (typeof onMessage === "function") {
         onMessage(payload);
       } else {
-        console.log("ERROR get messages");
+        // console.log("ERROR get messages");
       }
     });
 
