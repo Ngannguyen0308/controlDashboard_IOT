@@ -1,55 +1,47 @@
 import React from "react";
 import GaugeComponent from "react-gauge-component";
+import { Alert } from "@mui/material";
 
-function GaugeLight({value}) {
+function GaugeLight({ value }) {
+  if (value > 50 || value < 0) {
+    return (
+      <Alert severity="error" color="warning">
+        Error: Light value is out of range.
+      </Alert>
+    );
+  }
+
   return (
     <div>
-    <GaugeComponent
-      type="semicircle"
-      arc={{
-        width: 0.2,
-        padding: 0.005,
-        cornerRadius: 1,
-        gradient: true,
-        subArcs: [
-          {
-            limit: 25,
-            color: '#F5CD19',
-            showTick: true,
-          },
-          {
-            limit: 40,
-            color: '#5BE12C',
-            showTick: true,
-          },
-        //   {
-        //     limit: 60,
-        //     color: '#F5CD19',
-        //     showTick: true,
-        //   },
-        //   {
-        //     limit: 80,
-        //     color: '#F5CD19',
-        //     showTick: true,
-        //   },
-        //   {
-        //     limit: 100,
-        //     color: '#F5CD19',
-        //     showTick: true,
-        //   },
-          
-        ]
-      }}
-      pointer={{
-        color: '#C75CB0',
-        length: 0.80,
-        width: 15,
-      }}
-      
-      value={value} // change value here
-      minValue={0}
-      maxValue={50}
-    />
+      <GaugeComponent
+        type="semicircle"
+        arc={{
+          width: 0.2,
+          padding: 0.005,
+          cornerRadius: 1,
+          gradient: true,
+          subArcs: [
+            {
+              limit: 25,
+              color: "#F5CD19",
+              showTick: true,
+            },
+            {
+              limit: 40,
+              color: "#5BE12C",
+              showTick: true,
+            },
+          ],
+        }}
+        pointer={{
+          color: "#C75CB0",
+          length: 0.8,
+          width: 15,
+        }}
+        value={value}
+        minValue={0}
+        maxValue={50}
+      />
     </div>
   );
 }

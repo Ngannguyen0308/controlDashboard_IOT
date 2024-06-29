@@ -18,7 +18,6 @@ function BoxValue() {
   const [light, setLight] = useState(0);
 
   const hanldeMessages = (payload) => {
-    console.log("CHECK PAYLOAD DATA", payload);
     if (payload && payload.message) {
       // const messageString = payload.message.toString();
       try {

@@ -1,7 +1,16 @@
 import React from "react";
 import GaugeComponent from "react-gauge-component";
+import { Alert } from "@mui/material";
 
-function GaugeHum({value}) {
+function GaugeHum({ value }) {
+  if (value > 100 || value < 0) {
+    return (
+      <Alert severity="error" color="warning">
+        Error: Humidity value is out of range.
+      </Alert>
+    );
+  }
+
   return (
     <GaugeComponent
       type="semicircle"

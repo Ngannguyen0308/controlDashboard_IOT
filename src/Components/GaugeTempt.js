@@ -1,74 +1,50 @@
 import React from "react";
 import GaugeComponent from "react-gauge-component";
+import { Alert } from "@mui/material";
 
-function GaugeTempt({value}) {
-  if(!value){
+function GaugeTempt({ value }) {
+  if (value === undefined || value === null) {
     value = 10;
   }
+  if (value > 50 || value < 0) {
+    return (
+        <Alert severity="error" color="warning">
+          Error: Temperature value is out of range.
+        </Alert>
+    );
+  }
+
   return (
     <div>
-    <GaugeComponent
-      type="semicircle"
-      arc={{
-        width: 0.2,
-        padding: 0.005,
-        cornerRadius: 1,
-        // gradient: true,
-        subArcs: [
-          {
-            limit: 17,
-            color: '#c75cb0',
-            showTick: true,
-            tooltip: {
-              text: 'Low temperature!'
-            }
-          },
-          {
-            limit: 28,
-            color: '#5BE12C',
-            showTick: true,
-            tooltip: {
-              text: 'OK temperature!'
-            }
-          },
-          {
-            limit: 35,
-            color: '#F5CD19',
-            showTick: true,
-            tooltip: {
-              text: 'High temperature!'
-            }
-          },
-          {
-            color: '#EA4228',
-            tooltip: {
-              text: 'Too high temperature!'
-            }
-          }
-        ]
-      }}
-      pointer={{
-        color: '#C75CB0',
-        length: 0.80,
-        width: 15,
-        // elastic: true,
-      }}
-      labels={{
-        valueLabel: { formatTextValue: value => value + 'ºC' },
-        tickLabels: {
-          type: 'outer',
-          valueConfig: { formatTextValue: value => value + 'ºC', fontSize: 10 },
-        //   ticks: [
-        //     { value: 13 },
-        //     { value: 22.5 },
-        //     { value: 32 }
-        //   ],
-        }
-      }}
-      value={value} // change value here
-      minValue={10}
-      maxValue={50}
-    />
+      <GaugeComponent
+        type="semicircle"
+        arc={{
+          width: 0.2,
+          padding: 0.005,
+          cornerRadius: 1,
+          gradient: true,
+          subArcs: [
+            {
+              limit: 25,
+              color: '#F5CD19',
+              showTick: true,
+            },
+            {
+              limit: 40,
+              color: '#5BE12C',
+              showTick: true,
+            },
+          ]
+        }}
+        pointer={{
+          color: '#C75CB0',
+          length: 0.80,
+          width: 15,
+        }}
+        value={value}
+        minValue={0}
+        maxValue={50}
+      />
     </div>
   );
 }
