@@ -19,31 +19,33 @@ function BoxValue() {
 
   const hanldeMessages = (payload) => {
     if (payload) {
-      const messages = JSON.parse(payload.message);
-      const { msg, type } = messages;
-      // console.log("Extracted messages:", messages);
-      // console.log("Extracted type & msg:", msg, type);
-      // const value = parseFloat(msg);
-      if (!isNaN(msg)) {
-        switch (type) {
-          case 'temperature':
-            setTemperature(msg);
-            break;
-          case 'humidity':
-            setHumidity(msg);
-            break;
-          case 'light':
-            setLight(msg);
-            break;
-          default:
-            break;
+      try {
+        const messages = JSON.parse(payload.message);
+        const { msg, type } = messages;
+        console.log("CHECK PAYLOAD BOXVALUE:", messages);
+
+        if (!isNaN(msg)) {
+          switch (type) {
+            case "temperature":
+              setTemperature(msg);
+              break;
+            case "humidity":
+              setHumidity(msg);
+              break;
+            case "light":
+              setLight(msg);
+              break;
+            default:
+              console.log("Unknown type:", type);
+              break;
+          }
+        } else {
+          console.log("Invalid message:", msg);
         }
-      } else{
-        console.log('Invalid message:', msg);
+      } catch (error) {
+        console.error("Error parsing JSON:", error);
       }
-    } else{
-      console.log("No payload");
-    } 
+    }
   };
 
   return (
@@ -53,7 +55,7 @@ function BoxValue() {
         <div className="factor">Temperature</div>
         <FontAwesomeIcon icon={faTemperatureHigh} size="2x" color="white" />
         <div className="gaugeChart">
-          <GaugeTempt value={temperature}/>
+          <GaugeTempt value={temperature} />
         </div>
       </div>
 
@@ -61,7 +63,7 @@ function BoxValue() {
         <div className="factor">Humidity</div>
         <FontAwesomeIcon icon={faTint} size="2x" color="white" />
         <div className="gaugeChart">
-          <GaugeHum value={humidity}/>
+          <GaugeHum value={humidity} />
         </div>
       </div>
 
@@ -69,7 +71,7 @@ function BoxValue() {
         <div className="factor">Light loss</div>
         <FontAwesomeIcon icon={faWind} size="2x" color="white" />
         <div className="gaugeChart">
-          <GaugeLight value={light}/>
+          <GaugeLight value={light} />
         </div>
       </div>
     </div>
