@@ -4,7 +4,6 @@ import {
   faTemperatureHigh,
   faTint,
   faWind,
-  faLightbulb,
 } from "@fortawesome/free-solid-svg-icons";
 import "./BoxElement.css";
 import GaugeTempt from "./GaugeTempt";
