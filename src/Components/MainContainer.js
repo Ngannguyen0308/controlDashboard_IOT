@@ -1,6 +1,6 @@
 import React from "react";
 import "./BoxElement.css";
-import Banner from "../img/3dIll.jpg";
+import Banner from "../img/banner.jpg";
 import BoxElement from "./BoxElement";
 import { ReactTyped } from "react-typed";
 import GetWeather from "./GetWeather";
